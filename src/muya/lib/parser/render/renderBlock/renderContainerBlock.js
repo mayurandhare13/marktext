@@ -35,11 +35,15 @@ export default function renderContainerBlock (block, activeBlocks, matches, useC
   }
 
   if (editable === false) {
-    Object.assign(data.attrs, { contenteditable: 'false' })
+    Object.assign(data.attrs, {
+      contenteditable: 'false',
+      spellcheck: 'false'
+    })
   }
 
   if (/code|pre/.test(type) && typeof lang === 'string' && !!lang) {
     selector += `.language-${lang.replace(/[#.]{1}/g, '')}`
+    Object.assign(data.attrs, { spellcheck: 'false' })
   }
 
   if (/^h/.test(type)) {
@@ -68,6 +72,7 @@ export default function renderContainerBlock (block, activeBlocks, matches, useC
       /html|multiplemath|flowchart|mermaid|sequence|vega-lite/.test(functionType)
     ) {
       selector += `.${CLASS_OR_ID.AG_CONTAINER_BLOCK}`
+      Object.assign(data.attrs, { spellcheck: 'false' })
     }
   } else if (/ul|ol/.test(type) && listType) {
     selector += `.ag-${listType}-list`
@@ -80,6 +85,7 @@ export default function renderContainerBlock (block, activeBlocks, matches, useC
     selector += `.ag-${listItemType}-list-item`
     selector += isLooseListItem ? `.${CLASS_OR_ID.AG_LOOSE_LIST_ITEM}` : `.${CLASS_OR_ID.AG_TIGHT_LIST_ITEM}`
   } else if (type === 'pre') {
+    Object.assign(data.attrs, { spellcheck: 'false' })
     Object.assign(data.dataset, { role: functionType })
     selector += PRE_BLOCK_HASH[block.functionType]
 
