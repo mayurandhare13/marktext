@@ -318,11 +318,13 @@ export default {
     },
     spellcheckerEnabled: function (value, oldValue) {
       const {
+        editor,
         spellchecker,
         spellcheckerLanguage
       } = this
       if (value !== oldValue && spellchecker) {
-        // TODO(spell): Set Muya `spellcheck` property to `value`.
+        // Set Muya's spellcheck container attribute.
+        editor.setOptions({ spellcheckEnabled: value })
 
         // Spell check is available but not initialized.
         if (value && !spellchecker.isInitialized) {
@@ -520,6 +522,7 @@ export default {
         listIndentation,
         frontmatterType,
         hideQuickInsertHint,
+        spellcheckEnabled: spellcheckerEnabled,
         imageAction: this.imageAction.bind(this),
         imagePathPicker: this.imagePathPicker.bind(this),
         clipboardFilePath: guessClipboardFilePath,
