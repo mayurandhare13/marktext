@@ -1,5 +1,29 @@
 <template>
-  <div
+  <div v-if="doubleClicktoOpen === true"
+    :title="file.pathname"
+    class="side-bar-file"
+    :style="{'padding-left': `${depth * 5 + 15}px`, 'opacity': file.isMarkdown ? 1 : 0.75 }"
+    @dblclick="handleFileClick()"
+    :class="[{'current': currentFile.pathname === file.pathname, 'active': file.id === activeItem.id }]"
+    ref="file"
+  >
+
+    <file-icon
+      :name="file.name"
+    ></file-icon>
+    <input
+      type="text"
+      @click.stop="noop"
+      class="rename"
+      v-if="renameCache === file.pathname"
+      v-model="newName"
+      ref="renameInput"
+      @keydown.enter="rename"
+    >
+    <span v-else>{{ file.name }}</span>
+  </div>
+
+  <div v-else-if="doubleClicktoOpen === false"
     :title="file.pathname"
     class="side-bar-file"
     :style="{'padding-left': `${depth * 5 + 15}px`, 'opacity': file.isMarkdown ? 1 : 0.75 }"
@@ -53,11 +77,13 @@ export default {
   },
   computed: {
     ...mapState({
+      preferences: state => state.preferences,
       renameCache: state => state.project.renameCache,
       activeItem: state => state.project.activeItem,
       clipboard: state => state.project.clipboard,
       currentFile: state => state.editor.currentFile,
-      tabs: state => state.editor.tabs
+      tabs: state => state.editor.tabs,
+      doubleClicktoOpen: state => state.preferences.doubleClicktoOpen
     })
   },
   created () {

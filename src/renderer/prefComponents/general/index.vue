@@ -6,6 +6,11 @@
       :bool="autoSave"
       :onChange="value => onSelectChange('autoSave', value)"
     ></bool>
+      <bool
+      description="Double Click to open files (default: Double Click)"
+      :bool="doubleClicktoOpen"
+      :onChange="value => onSelectChange('doubleClicktoOpen', value)"
+    ></bool>
     <range
       description="The time in ms after a change that the file is saved."
       :value="autoSaveDelay"
@@ -101,6 +106,7 @@ export default {
   computed: {
     ...mapState({
       autoSave: state => state.preferences.autoSave,
+      doubleClicktoOpen: state => state.preferences.doubleClicktoOpen,
       autoSaveDelay: state => state.preferences.autoSaveDelay,
       titleBarStyle: state => state.preferences.titleBarStyle,
       defaultDirectoryToOpen: state => state.preferences.defaultDirectoryToOpen,

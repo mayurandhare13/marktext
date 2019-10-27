@@ -7,6 +7,7 @@ const state = {
   titleBarStyle: 'custom',
   openFilesInNewWindow: false,
   openFolderInNewWindow: false,
+  doubleClicktoOpen: false,
   hideScrollbar: false,
   aidou: true,
   fileSortBy: 'created',
@@ -43,8 +44,8 @@ const state = {
   theme: 'light',
 
   // Default values that are overwritten with the entries below.
-  sideBarVisibility: false,
-  tabBarVisibility: false,
+  sideBarVisibility: true,
+  tabBarVisibility: true,
   sourceCodeModeEnabled: false,
 
   searchExclusions: [],
