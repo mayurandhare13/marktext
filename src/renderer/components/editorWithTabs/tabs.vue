@@ -149,6 +149,7 @@ export default {
     fill: var(--themeColor);
   }
   .editor-tabs {
+    cursor: default;
     position: relative;
     display: flex;
     flex-direction: row;
@@ -166,6 +167,7 @@ export default {
     overflow: hidden;
   }
   .tabs-container {
+    cursor: default;
     min-width: min-content;
     list-style: none;
     margin: 0;
