@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="editor-container"
-  >
+  <div class="editor-container">
     <side-bar v-if="init"></side-bar>
     <div class="editor-middle">
       <title-bar
@@ -186,6 +184,7 @@ export default {
 <style scoped>
   .editor-placeholder,
   .editor-container {
+    cursor: default;
     display: flex;
     flex-direction: row;
     position: absolute;
@@ -206,6 +205,7 @@ export default {
     background: var(--editorBgColor);
   }
   .editor-middle {
+    cursor: default;
     display: flex;
     flex-direction: column;
     flex: 1;
