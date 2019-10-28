@@ -44,8 +44,8 @@ const state = {
   theme: 'light',
 
   // Default values that are overwritten with the entries below.
-  sideBarVisibility: true,
-  tabBarVisibility: true,
+  sideBarVisibility: false,
+  tabBarVisibility: false,
   sourceCodeModeEnabled: false,
 
   searchExclusions: [],

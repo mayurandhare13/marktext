@@ -7,7 +7,7 @@
       :onChange="value => onSelectChange('autoSave', value)"
     ></bool>
       <bool
-      description="Double Click to open files (default: Double Click)"
+      description="Double Click to open files"
       :bool="doubleClicktoOpen"
       :onChange="value => onSelectChange('doubleClicktoOpen', value)"
     ></bool>
