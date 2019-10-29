@@ -614,8 +614,9 @@ export default {
     scrollToCursor (duration = 300) {
       this.$nextTick(() => {
         const { container } = this.editor
-        const { y } = this.editor.getSelection().cursorCoords
-        animatedScrollTo(container, container.scrollTop + y - STANDAR_Y, duration)
+        // const { y } = this.editor.getSelection().cursorCoords
+        // animatedScrollTo(container, container.scrollTop + y - STANDAR_Y, duration)
+        animatedScrollTo(container, container.scrollTop - STANDAR_Y, duration)
       })
     },
 
