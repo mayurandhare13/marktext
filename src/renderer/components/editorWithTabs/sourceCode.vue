@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import codeMirror, { setMode, setCursorAtLastLine, setTextDirection } from '../../codeMirror'
+import codeMirror, { setMode, setCursorAtLastLine, setCursorAtFirstLine, setTextDirection } from '../../codeMirror'
 import { wordCount as getWordCount } from 'muya/lib/utils'
 import { mapState } from 'vuex'
 import { adjustCursor } from '../../util'
@@ -213,7 +213,7 @@ export default {
         const { anchor, focus } = cursor
         editor.setSelection(anchor, focus, { scroll: true }) // Scroll the focus into view.
       } else {
-        setCursorAtLastLine(editor)
+        setCursorAtFirstLine(editor)
       }
       this.tabId = id
     },
