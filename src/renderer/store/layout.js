@@ -41,7 +41,14 @@ const actions = {
     ipcRenderer.send('mt::view-layout-changed', windowId, { showTabBar, showSideBar })
   },
   CHANGE_SIDE_BAR_WIDTH ({ commit }, width) {
-    commit('SET_SIDE_BAR_WIDTH', width)
+    if (width < 220) {
+      commit('SET_LAYOUT', { showSideBar: false })
+      const { windowId } = global.marktext.env
+      const { showTabBar, showSideBar } = state
+      ipcRenderer.send('mt::view-layout-changed', windowId, { showTabBar, showSideBar })
+    } else {
+      commit('SET_SIDE_BAR_WIDTH', width)
+    }
   }
 }
 

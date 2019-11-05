@@ -97,13 +97,17 @@ export default {
       const mouseUpHandler = event => {
         document.removeEventListener('mousemove', mouseMoveHandler, false)
         document.removeEventListener('mouseup', mouseUpHandler, false)
-        this.$store.dispatch('CHANGE_SIDE_BAR_WIDTH', sideBarWidth < 220 ? 220 : sideBarWidth)
+        this.$store.dispatch('CHANGE_SIDE_BAR_WIDTH', sideBarWidth > 280 ? 280 : sideBarWidth)
       }
 
       const mouseMoveHandler = event => {
         const offset = event.clientX - startX
         sideBarWidth = startWidth + offset
-        this.sideBarViewWidth = sideBarWidth
+        if (sideBarWidth > 280) {
+          this.sideBarViewWidth = 280
+        } else {
+          this.sideBarViewWidth = sideBarWidth
+        }
       }
 
       const mouseDownHandler = event => {
