@@ -1,18 +1,42 @@
 import { getMenuItemById } from '../../menu'
+import { ipcMain } from 'electron'
 
 const typewriterModeMenuItemId = 'typewriterModeMenuItem'
 const focusModeMenuItemId = 'focusModeMenuItem'
 
-export const typeMode = (win, type, item) => {
-  const { checked } = item
-  win.webContents.send('AGANI::view', { type, checked })
+// export const typeMode = (win, type, item) => {
+//   const { checked } = item
+//   win.webContents.send('AGANI::view', { type, checked })
+//   if (type === 'sourceCode') {
+//     const typewriterModeMenuItem = getMenuItemById(typewriterModeMenuItemId)
+//     const focusModeMenuItem = getMenuItemById(focusModeMenuItemId)
+//     typewriterModeMenuItem.enabled = !checked
+//     focusModeMenuItem.enabled = !checked
+//   }
+// }
 
-  if (type === 'sourceCode') {
-    const typewriterModeMenuItem = getMenuItemById(typewriterModeMenuItemId)
-    const focusModeMenuItem = getMenuItemById(focusModeMenuItemId)
-    typewriterModeMenuItem.enabled = !checked
-    focusModeMenuItem.enabled = !checked
-  }
+export const focus = (item, browserWindow) => {
+  const { checked } = item
+  ipcMain.emit('set-user-preference', { focus: checked })
+  browserWindow.webContents.send('AGANI::view', { focus, checked })
+}
+
+export const typewriter = (item, browserWindow) => {
+  const { checked } = item
+  ipcMain.emit('set-user-preference', { typewriter: checked })
+  browserWindow.webContents.send('AGANI::view', { typewriter, checked })
+}
+
+export const sourceCode = (item, browserWindow, val) => {
+  const { checked } = item
+  ipcMain.emit('set-user-preference', { sourceCode: checked })
+  browserWindow.webContents.send('AGANI::view', { sourceCode, checked })
+  browserWindow.webContents.send('AGANI::view', { typewriter, val })
+  browserWindow.webContents.send('AGANI::view', { focus, val })
+  const typewriterModeMenuItem = getMenuItemById(typewriterModeMenuItemId)
+  const focusModeMenuItem = getMenuItemById(focusModeMenuItemId)
+  typewriterModeMenuItem.enabled = !checked
+  focusModeMenuItem.enabled = !checked
 }
 
 export const layout = (item, win, type) => {

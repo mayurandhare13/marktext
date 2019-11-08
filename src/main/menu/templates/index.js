@@ -40,7 +40,7 @@ export default function (keybindings, preferences, recentlyUsedFiles) {
     format(keybindings),
     window(keybindings),
     theme(preferences),
-    view(keybindings),
+    view(keybindings, preferences),
     help()
   ]
 }

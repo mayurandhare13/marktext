@@ -69,6 +69,7 @@
     <search
       v-if="!sourceCode"
     ></search>
+    <!-- <button id="btnScrollToTop" @click="scrollToTop">DOWN</button> -->
   </div>
 </template>
 
@@ -178,7 +179,7 @@ export default {
       }
     },
     focus: function (value) {
-      this.editor.setFocusMode(value)
+      this.editor.setFocus(value)
     },
     fontSize: function (value, oldValue) {
       const { editor } = this
@@ -614,9 +615,14 @@ export default {
     scrollToCursor (duration = 300) {
       this.$nextTick(() => {
         const { container } = this.editor
-        // const { y } = this.editor.getSelection().cursorCoords
-        // animatedScrollTo(container, container.scrollTop + y - STANDAR_Y, duration)
-        animatedScrollTo(container, container.scrollTop - STANDAR_Y, duration)
+        const { y } = this.editor.getSelection().cursorCoords
+        animatedScrollTo(container, container.scrollTop + y - STANDAR_Y, duration)
+      })
+    },
+
+    scrollToTop (duration = 100) {
+      this.$nextTick(() => {
+        this.scrollToCursor()
       })
     },
 
@@ -874,4 +880,21 @@ export default {
     top: auto;
     left: auto;
   }
+  /* #btnScrollToTop {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #cf2132;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .25);
+    color: azure;
+    cursor: pointer;
+    outline: none;
+    border: none;
+  }
+  #btnScrollToTop:active {
+    background: #000000;
+  } */
 </style>

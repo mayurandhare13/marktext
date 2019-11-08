@@ -56,7 +56,7 @@ class EditorWindow extends BaseWindow {
       theme,
       sideBarVisibility,
       tabBarVisibility,
-      sourceCodeModeEnabled
+      sourceCode
     } = preferences.getAll()
     if (!isOsx) {
       winOptions.titleBarStyle = 'default'
@@ -71,7 +71,7 @@ class EditorWindow extends BaseWindow {
     this.id = win.id
 
     // Create a menu for the current window
-    appMenu.addEditorMenu(win, { sourceCodeModeEnabled })
+    appMenu.addEditorMenu(win, { sourceCode })
 
     win.webContents.once('did-finish-load', () => {
       this.lifecycle = WindowLifecycle.READY
@@ -89,9 +89,8 @@ class EditorWindow extends BaseWindow {
         lineEnding,
         sideBarVisibility,
         tabBarVisibility,
-        sourceCodeModeEnabled
+        sourceCode
       })
-
       this._doOpenFilesToOpen()
       this._markdownToOpen.length = 0
     })
@@ -363,7 +362,7 @@ class EditorWindow extends BaseWindow {
     browserWindow.webContents.once('did-finish-load', () => {
       this.lifecycle = WindowLifecycle.READY
       const { preferences } = this._accessor
-      const { sideBarVisibility, tabBarVisibility, sourceCodeModeEnabled } = preferences.getAll()
+      const { sideBarVisibility, tabBarVisibility, sourceCode } = preferences.getAll()
       const lineEnding = preferences.getPreferedEol()
       browserWindow.webContents.send('mt::bootstrap-editor', {
         addBlankTab: true,
@@ -371,7 +370,7 @@ class EditorWindow extends BaseWindow {
         lineEnding,
         sideBarVisibility,
         tabBarVisibility,
-        sourceCodeModeEnabled
+        sourceCode
       })
     })
 

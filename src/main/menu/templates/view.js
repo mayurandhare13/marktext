@@ -1,7 +1,8 @@
 import { ipcMain } from 'electron'
 import * as actions from '../actions/view'
 
-export default function (keybindings) {
+export default function (keybindings, userPreference) {
+  const { focus, typewriter, sourceCode } = userPreference.getAll()
   const viewMenu = {
     label: '&View',
     submenu: [{
@@ -9,39 +10,39 @@ export default function (keybindings) {
       label: 'Source Code Mode',
       accelerator: keybindings.getAccelerator('viewSourceCodeMode'),
       type: 'checkbox',
-      checked: false,
+      checked: sourceCode,
       click (item, browserWindow, event) {
         // if we call this function, the checked state is not set
         if (!event) {
           item.checked = !item.checked
         }
-        actions.typeMode(browserWindow, 'sourceCode', item)
+        actions.sourceCode(item, browserWindow, false)
       }
     }, {
       id: 'typewriterModeMenuItem',
       label: 'Typewriter Mode',
       accelerator: keybindings.getAccelerator('viewTypewriterMode'),
       type: 'checkbox',
-      checked: false,
+      checked: typewriter,
       click (item, browserWindow, event) {
         // if we call this function, the checked state is not set
         if (!event) {
           item.checked = !item.checked
         }
-        actions.typeMode(browserWindow, 'typewriter', item)
+        actions.typewriter(item, browserWindow)
       }
     }, {
       id: 'focusModeMenuItem',
       label: 'Focus Mode',
       accelerator: keybindings.getAccelerator('viewFocusMode'),
       type: 'checkbox',
-      checked: false,
+      checked: focus,
       click (item, browserWindow, event) {
         // if we call this function, the checked state is not set
         if (!event) {
           item.checked = !item.checked
         }
-        actions.typeMode(browserWindow, 'focus', item)
+        actions.focus(item, browserWindow)
       }
     }, {
       type: 'separator'
