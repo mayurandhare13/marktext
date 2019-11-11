@@ -395,7 +395,7 @@ li.ag-task-list-item > input.ag-checkbox-checked ~ * {
 }
 
 li.ag-task-list-item > input.ag-checkbox-checked ~ p {
-  text-decoration: line-through;
+  /* text-decoration: line-through; */
   color: var(--editorColor50);
 }
 
