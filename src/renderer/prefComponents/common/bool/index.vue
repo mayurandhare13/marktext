@@ -2,9 +2,9 @@
   <section class="pref-switch-item" :class="{'ag-underdevelop': disable}">
     <div class="description">
       <span>{{description}}</span>
-      <i class="el-icon-info" v-if="more"
+      <em class="el-icon-info" v-if="more"
         @click="handleMoreClick"
-      ></i>
+      ></em>
     </div>
     <el-switch
       style="display: block"

@@ -26,7 +26,7 @@
                 content="The token is saved by Keychain on macOS, Secret Service API/libsecret on Linux and Credential Vault on Windows."
                 placement="top-start"
               >
-                <i class="el-icon-info"></i>
+                <em class="el-icon-info"></em>
               </el-tooltip>
             </div>
             <el-input v-model="githubToken" placeholder="Input token" size="mini"></el-input>

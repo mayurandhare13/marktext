@@ -89,7 +89,7 @@ export default {
       // Init CodeMirror
       const editor = this.editor = codeMirror(container, codeMirrorConfig)
 
-      bus.$on('file-loaded', this.handleFileChange)
+      bus.$on('file-loaded', this.handleFileLoad)
       bus.$on('file-changed', this.handleFileChange)
       bus.$on('dotu-select', this.handleSelectDoutu)
       bus.$on('selectAll', this.handleSelectAll)
@@ -114,7 +114,7 @@ export default {
     this.viewDestroyed = true
     if (this.commitTimer) clearTimeout(this.commitTimer)
 
-    bus.$off('file-loaded', this.handleFileChange)
+    bus.$off('file-loaded', this.handleFileLoad)
     bus.$off('file-changed', this.handleFileChange)
     bus.$off('dotu-select', this.handleSelectDoutu)
     bus.$off('selectAll', this.handleSelectAll)
@@ -213,8 +213,18 @@ export default {
         const { anchor, focus } = cursor
         editor.setSelection(anchor, focus, { scroll: true }) // Scroll the focus into view.
       } else {
-        setCursorAtFirstLine(editor)
+        setCursorAtLastLine(editor)
       }
+      this.tabId = id
+    },
+    handleFileLoad ({ id, markdown, cursor }) {
+      this.prepareTabSwitch()
+
+      const { editor } = this
+      if (typeof markdown === 'string') {
+        editor.setValue(markdown)
+      }
+      setCursorAtFirstLine(editor)
       this.tabId = id
     },
     // Get markdown and cursor from CodeMirror.

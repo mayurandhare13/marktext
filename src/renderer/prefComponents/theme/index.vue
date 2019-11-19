@@ -81,7 +81,7 @@ export default {
   }
   .offcial-themes {
     & .theme {
-      cursor: pointer;
+      cursor: default;
       width: 250px;
       height: 100px;
       margin: 0px 22px 10px 22px;

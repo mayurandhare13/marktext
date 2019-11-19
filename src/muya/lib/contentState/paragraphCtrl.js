@@ -173,7 +173,7 @@ const paragraphCtrl = ContentState => {
         const paragraph = this.getBlock(block.parent)
         if (listType === 'task') {
           // 1. first update the block to bullet list
-          const listItemParagraph = this.updateList(paragraph, 'bullet', undefined, block)
+          const listItemParagraph = this.updateList(paragraph, 'bullet', block, undefined)
           // 2. second update bullet list to task list
           setTimeout(() => {
             this.updateTaskListItem(listItemParagraph, listType)
@@ -184,7 +184,7 @@ const paragraphCtrl = ContentState => {
           })
           return false
         } else {
-          this.updateList(paragraph, listType, undefined, block)
+          this.updateList(paragraph, listType, block, undefined)
         }
       } else {
         const { parent, startIndex, endIndex } = this.getCommonParent()

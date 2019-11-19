@@ -7,7 +7,7 @@
       custom-class="ag-dialog-table"
       width="400px"
     >
-      <img class="logo" src="../../assets/images/logo.png" />
+      <img class="logo" src="../../assets/images/logo.png" alt="about" />
       <el-row>
         <el-col :span="24">
           <h3 class="title">{{ name }}</h3>

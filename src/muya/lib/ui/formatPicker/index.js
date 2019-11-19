@@ -70,13 +70,22 @@ class FormatPicker extends BaseFloat {
         on: {
           click: event => {
             this.selectItem(event, i)
+          },
+          mouseover: event => {
+            let target = event.target
+            target.innerText = i.title
+            target.style.background = ''
+          },
+          mouseout: event => {
+            let target = event.target
+            target.innerText = ''
+            target.style.background = `url(${i.icon}) no-repeat`
+            target.style.backgroundSize = '75%'
           }
         }
       }, iconWrapper)
     })
-
     const vnode = h('ul', children)
-
     if (oldVnode) {
       patch(oldVnode, vnode)
     } else {

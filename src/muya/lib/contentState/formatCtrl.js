@@ -33,14 +33,14 @@ const getOffset = (offset, { range: { start, end }, type, tag, anchor, alt }) =>
     case 'link': {
       const MARKER_LEN = 1
       if (dis < MARKER_LEN) return 0
-      if (dis >= MARKER_LEN && dis <= MARKER_LEN + anchor.length) return -1
+      if (dis >= 1 && dis <= MARKER_LEN + anchor.length) return -1
       if (dis > MARKER_LEN + anchor.length) return anchor.length - dis
       break
     }
     case 'image': {
       const MARKER_LEN = 1
       if (dis < MARKER_LEN) return 0
-      if (dis >= MARKER_LEN && dis < MARKER_LEN * 2) return -1
+      if (dis >= 1 && dis < MARKER_LEN * 2) return -1
       if (dis >= MARKER_LEN * 2 && dis <= MARKER_LEN * 2 + alt.length) return -2
       if (dis > MARKER_LEN * 2 + alt.length) return alt.length - dis
       break

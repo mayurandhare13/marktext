@@ -87,14 +87,14 @@ const updateCtrl = ContentState => {
         return this.updateThematicBreak(block, hr, line)
 
       case !!bullet:
-        return this.updateList(block, 'bullet', bullet, line)
+        return this.updateList(block, 'bullet', line, bullet)
 
       // only `bullet` list item can be update to `task` list item
       case !!tasklist && listItem && listItem.listItemType === 'bullet':
         return this.updateTaskListItem(block, 'tasklist', tasklist)
 
       case !!order:
-        return this.updateList(block, 'order', order, line)
+        return this.updateList(block, 'order', line, order)
 
       case !!atxHeader:
         return this.updateAtxHeader(block, atxHeader, line)
@@ -166,7 +166,7 @@ const updateCtrl = ContentState => {
     return thematicBlock
   }
 
-  ContentState.prototype.updateList = function (block, type, marker = '', line) {
+  ContentState.prototype.updateList = function (block, type, line, marker = '') {
     const cleanMarker = marker ? marker.trim() : null
     const { preferLooseListItem } = this.muya.options
     const wrapperTag = type === 'order' ? 'ol' : 'ul' // `bullet` => `ul` and `order` => `ol`

@@ -39,6 +39,7 @@
         <use xlink:href="#icon-plus"></use>
       </svg>
     </div>
+    <!-- <button id="BtnScrollToTop">UP</button> -->
   </div>
 </template>
 
@@ -90,7 +91,6 @@ export default {
 
       // Allow to scroll through the tabs by mouse wheel or touchpad.
       tabs.addEventListener('wheel', this.handleTabScroll)
-
       // Allow tab drag and drop to reorder tabs.
       const drake = this.drake = dragula([this.$refs.tabDropContainer], {
         direction: 'horizontal',
@@ -132,7 +132,6 @@ export default {
   beforeDestroy () {
     const tabs = this.$refs.tabContainer
     tabs.removeEventListener('wheel', this.handleTabScroll)
-
     if (this.autoScroller) {
       // Force destroy
       this.autoScroller.destroy(true)

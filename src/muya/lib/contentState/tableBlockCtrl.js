@@ -219,11 +219,11 @@ const tableBlockCtrl = ContentState => {
           Object.assign(table, { row, column })
 
           const cursorBlock = headerRow.children[0]
-          const key = cursorBlock.key
+          const bKey = cursorBlock.key
           const offset = cursorBlock.text.length
           this.cursor = {
-            start: { key, offset },
-            end: { key, offset }
+            start: { bKey, offset },
+            end: { bKey, offset }
           }
           this.muya.eventCenter.dispatch('stateChange')
           this.partialRender()

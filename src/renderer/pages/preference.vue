@@ -62,7 +62,7 @@ export default {
 <style scoped>
 .pref-container {
   --prefSideBarWidth: 320px;
-
+  cursor: default;
   width: 100vw;
   height: 100vh;
   max-width: 100vw;

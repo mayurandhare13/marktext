@@ -231,7 +231,7 @@ const pasteCtrl = ContentState => {
   }
 
   // Handle `normal` and `pasteAsPlainText` paste for preview mode.
-  ContentState.prototype.pasteHandler = async function (event, type = 'normal', rawText, rawHtml) {
+  ContentState.prototype.pasteHandler = async function (event, rawText, rawHtml, type = 'normal') {
     event.preventDefault()
     event.stopPropagation()
 
@@ -259,7 +259,7 @@ const pasteCtrl = ContentState => {
 
     if (start.key !== end.key) {
       this.cutHandler()
-      return this.pasteHandler(event, type, rawText, rawHtml)
+      return this.pasteHandler(event, rawText, rawHtml, type)
     }
 
     // NOTE: We should parse HTML if we can and use it instead the image (see GH#1271).
@@ -393,15 +393,15 @@ const pasteCtrl = ContentState => {
 
     const getLastBlock = blocks => {
       const len = blocks.length
-      const lastBlock = blocks[len - 1]
+      const lastBlk = blocks[len - 1]
 
-      if (lastBlock.children.length === 0 && HAS_TEXT_BLOCK_REG.test(lastBlock.type)) {
-        return lastBlock
+      if (lastBlk.children.length === 0 && HAS_TEXT_BLOCK_REG.test(lastBlk.type)) {
+        return lastBlk
       } else {
-        if (lastBlock.editable === false) {
+        if (lastBlk.editable === false) {
           return getLastBlock(blocks[len - 2].children)
         } else {
-          return getLastBlock(lastBlock.children)
+          return getLastBlock(lastBlk.children)
         }
       }
     }

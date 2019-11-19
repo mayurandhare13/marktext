@@ -448,11 +448,11 @@ const enterCtrl = ContentState => {
       }
     }
 
-    const getParagraphBlock = block => {
-      if (block.type === 'li') {
-        return block.listItemType === 'task' ? block.children[1] : block.children[0]
+    const getParagraphBlock = blk => {
+      if (blk.type === 'li') {
+        return blk.listItemType === 'task' ? blk.children[1] : blk.children[0]
       } else {
-        return block
+        return blk
       }
     }
 
@@ -484,11 +484,13 @@ const enterCtrl = ContentState => {
     }
 
     cursorBlock = getParagraphBlock(cursorBlock)
-    const key = cursorBlock.type === 'p' || cursorBlock.type === 'pre' ? cursorBlock.children[0].key : cursorBlock.key
-    const offset = 0
-    this.cursor = {
-      start: { key, offset },
-      end: { key, offset }
+    if (cursorBlock !== undefined) {
+      const key = cursorBlock.type === 'p' || cursorBlock.type === 'pre' ? cursorBlock.children[0].key : cursorBlock.key
+      const offset = 0
+      this.cursor = {
+        start: { key, offset },
+        end: { key, offset }
+      }
     }
 
     this.partialRender()

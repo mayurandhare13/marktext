@@ -270,7 +270,7 @@ export default {
       }
       & > a {
         pointer-events: auto;
-        cursor: pointer;
+        cursor: default;
         margin-left: 8px;
         color: var(--sideBarIconColor);
         opacity: 0;
