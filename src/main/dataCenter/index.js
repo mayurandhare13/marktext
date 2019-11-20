@@ -152,7 +152,7 @@ class DataCenter extends EventEmitter {
     }
 
     Object.keys(settings).map(key => {
-      this.setItem(key, settings[key])
+      return this.setItem(key, settings[key])
     })
   }
 
