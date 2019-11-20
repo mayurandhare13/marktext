@@ -254,24 +254,24 @@ class WindowManager extends EventEmitter {
     }
 
     const buf = []
-    const len = filePathScores.length
-    for (let i = 0; i < len; ++i) {
-      let { id: windowId, score } = filePathScores[i]
-
-      if (score === -1) {
-        // Skip files that already opened.
-        continue
-      } else if (score === 0) {
-        // There is no best window to open the file(s) in.
-        windowId = lastActiveEditorId
+    if (filePathScores !== null) {
+      const len = filePathScores.length
+      for (let i = 0; i < len; ++i) {
+        let { id: windowId, score } = filePathScores[i]
+        if (score === -1) {
+          // Skip files that already opened.
+          continue
+        } else if (score === 0) {
+          // There is no best window to open the file(s) in.
+          windowId = lastActiveEditorId
+        }
+        let item = buf.find(w => w.windowId === windowId)
+        if (!item) {
+          item = { windowId, fileList: [] }
+          buf.push(item)
+        }
+        item.fileList.push(fileList[i])
       }
-
-      let item = buf.find(w => w.windowId === windowId)
-      if (!item) {
-        item = { windowId, fileList: [] }
-        buf.push(item)
-      }
-      item.fileList.push(fileList[i])
     }
     return buf
   }

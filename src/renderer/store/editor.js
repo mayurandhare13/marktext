@@ -19,28 +19,28 @@ const state = {
 
 const mutations = {
   // set search key and matches also index
-  SET_SEARCH (state, value) {
-    state.currentFile.searchMatches = value
+  SET_SEARCH (st, value) {
+    st.currentFile.searchMatches = value
   },
-  SET_TOC (state, toc) {
-    state.listToc = toc
-    state.toc = listToTree(toc)
+  SET_TOC (st, toc) {
+    st.listToc = toc
+    st.toc = listToTree(toc)
   },
-  SET_CURRENT_FILE (state, currentFile) {
-    const oldCurrentFile = state.currentFile
+  SET_CURRENT_FILE (st, currentFile) {
+    const oldCurrentFile = st.currentFile
     if (!oldCurrentFile.id || oldCurrentFile.id !== currentFile.id) {
       const { id, markdown, cursor, history, pathname } = currentFile
       window.DIRNAME = pathname ? path.dirname(pathname) : ''
       // set state first, then emit file changed event
-      state.currentFile = currentFile
+      st.currentFile = currentFile
       bus.$emit('file-changed', { id, markdown, cursor, renderCursor: true, history })
     }
   },
-  ADD_FILE_TO_TABS (state, currentFile) {
-    state.tabs.push(currentFile)
+  ADD_FILE_TO_TABS (st, currentFile) {
+    st.tabs.push(currentFile)
   },
-  REMOVE_FILE_WITHIN_TABS (state, file) {
-    const { tabs, currentFile } = state
+  REMOVE_FILE_WITHIN_TABS (st, file) {
+    const { tabs, currentFile } = st
     const index = tabs.indexOf(file)
     tabs.splice(index, 1)
 
@@ -51,8 +51,8 @@ const mutations = {
     }
 
     if (file.id === currentFile.id) {
-      const fileState = state.tabs[index] || state.tabs[index - 1] || state.tabs[0] || {}
-      state.currentFile = fileState
+      const fileState = st.tabs[index] || st.tabs[index - 1] || st.tabs[0] || {}
+      st.currentFile = fileState
       if (typeof fileState.markdown === 'string') {
         const { id, markdown, cursor, history, pathname } = fileState
         window.DIRNAME = pathname ? path.dirname(pathname) : ''
@@ -60,18 +60,18 @@ const mutations = {
       }
     }
 
-    if (state.tabs.length === 0) {
+    if (st.tabs.length === 0) {
       // Handle close the last tab, need to reset the TOC state
-      state.listToc = []
-      state.toc = []
+      st.listToc = []
+      st.toc = []
     }
   },
   // Exchange from with to and move from to the end if to is null or empty.
-  EXCHANGE_TABS_BY_ID (state, tabIDs) {
+  EXCHANGE_TABS_BY_ID (st, tabIDs) {
     const { fromId } = tabIDs
     const toId = tabIDs.toId // may be null
 
-    const { tabs } = state
+    const { tabs } = st
     const moveItem = (arr, from, to) => {
       if (from === to) return true
       const len = arr.length
@@ -91,8 +91,8 @@ const mutations = {
       moveItem(tabs, fromIndex, realToIndex)
     }
   },
-  LOAD_CHANGE (state, change) {
-    const { tabs, currentFile } = state
+  LOAD_CHANGE (st, change) {
+    const { tabs, currentFile } = st
     const { data, pathname } = change
     const { isMixedLineEndings, lineEnding, adjustLineEndingOnSave, encoding, markdown, filename } = data
     const options = { encoding, lineEnding, adjustLineEndingOnSave }
@@ -150,14 +150,14 @@ const mutations = {
 
     // Reload the editor if the tab is currently opened.
     if (pathname === currentFile.pathname) {
-      state.currentFile = tab
+      st.currentFile = tab
       const { id, cursor, history } = tab
       bus.$emit('file-changed', { id, markdown, cursor, renderCursor: true, history })
     }
   },
   // NOTE: Please call this function only from main process via "AGANI::set-pathname" and free resources before!
-  SET_PATHNAME (state, { tab, fileInfo }) {
-    const { currentFile } = state
+  SET_PATHNAME (st, { tab, fileInfo }) {
+    const { currentFile } = st
     const { filename, pathname, id } = fileInfo
 
     // Change reference path for images.

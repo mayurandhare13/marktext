@@ -110,8 +110,8 @@ const handleResponseForSave = async (e, { id, filename, markdown, pathname, opti
         ipcMain.emit('window-add-file-path', win.id, filePath)
         ipcMain.emit('menu-add-recently-used', filePath)
 
-        const filename = path.basename(filePath)
-        win.webContents.send('mt::set-pathname', { id, pathname: filePath, filename })
+        const filenameSave = path.basename(filePath)
+        win.webContents.send('mt::set-pathname', { id, pathname: filePath, filenameSave })
       } else {
         ipcMain.emit('window-file-saved', win.id, filePath)
         win.webContents.send('mt::tab-saved', id)
@@ -227,14 +227,14 @@ ipcMain.on('AGANI::response-file-save-as', async (e, { id, filename, markdown, p
           ipcMain.emit('window-add-file-path', win.id, filePath)
           ipcMain.emit('menu-add-recently-used', filePath)
 
-          const filename = path.basename(filePath)
-          win.webContents.send('mt::set-pathname', { id, pathname: filePath, filename })
+          const filenameSave = path.basename(filePath)
+          win.webContents.send('mt::set-pathname', { id, pathname: filePath, filenameSave })
         } else if (pathname !== filePath) {
           // Update window file list and watcher.
           ipcMain.emit('window-change-file-path', win.id, filePath, pathname)
 
-          const filename = path.basename(filePath)
-          win.webContents.send('mt::set-pathname', { id, pathname: filePath, filename })
+          const filenameSave = path.basename(filePath)
+          win.webContents.send('mt::set-pathname', { id, pathname: filePath, filenameSave })
         } else {
           ipcMain.emit('window-file-saved', win.id, filePath)
           win.webContents.send('mt::tab-saved', id)

@@ -501,7 +501,7 @@ var parser = function() {
                     return !0;
                 }
             }
-            return !0;
+            //  return !0;
         }
     }, lexer = function() {
         var lexer = {
@@ -994,12 +994,12 @@ _.extend(BaseTheme.prototype, {
     }
 
     _.each(actors, _.bind(function(a) {
-      var bb = this.textBBox(a.name, font);
-      a.textBB = bb;
+      var bbox = this.textBBox(a.name, font);
+      a.textBB = bbox;
 
       a.x = 0; a.y = 0;
-      a.width  = bb.width  + (ACTOR_PADDING + ACTOR_MARGIN) * 2;
-      a.height = bb.height + (ACTOR_PADDING + ACTOR_MARGIN) * 2;
+      a.width  = bbox.width  + (ACTOR_PADDING + ACTOR_MARGIN) * 2;
+      a.height = bbox.height + (ACTOR_PADDING + ACTOR_MARGIN) * 2;
 
       a.distances = [];
       a.paddingRight = 0;
@@ -1028,11 +1028,11 @@ _.extend(BaseTheme.prototype, {
       var a;
       var b;
 
-      var bb = this.textBBox(s.message, font);
+      var bbox = this.textBBox(s.message, font);
 
-      s.textBB = bb;
-      s.width   = bb.width;
-      s.height  = bb.height;
+      s.textBB = bbox;
+      s.width   = bbox.width;
+      s.height  = bbox.height;
 
       var extraWidth = 0;
 

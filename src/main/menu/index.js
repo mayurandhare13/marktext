@@ -45,10 +45,10 @@ class AppMenu {
    * @param {string} filePath The file or directory full path.
    */
   addRecentlyUsedDocument (filePath) {
-    const { isOsxOrWindows, isOsx, MAX_RECENTLY_USED_DOCUMENTS, RECENTS_PATH } = this
+    const { isOsxOrWindows, MAX_RECENTLY_USED_DOCUMENTS, RECENTS_PATH } = this
 
     if (isOsxOrWindows) app.addRecentDocument(filePath)
-    if (isOsx) return
+    if (this.isOsx) return
 
     const recentDocuments = this.getRecentlyUsedDocuments()
     const index = recentDocuments.indexOf(filePath)
@@ -103,9 +103,9 @@ class AppMenu {
    * Clear recently used documents.
    */
   clearRecentlyUsedDocuments () {
-    const { isOsxOrWindows, isOsx, RECENTS_PATH } = this
+    const { isOsxOrWindows, RECENTS_PATH } = this
     if (isOsxOrWindows) app.clearRecentDocuments()
-    if (isOsx) return
+    if (this.isOsx) return
 
     const recentDocuments = []
     this.updateAppMenu(recentDocuments)

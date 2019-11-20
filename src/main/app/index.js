@@ -152,7 +152,7 @@ class App {
       systemPreferences.subscribeNotification(
         'AppleInterfaceThemeChangedNotification',
         () => {
-          const preferences = this._accessor.preferences
+          // const preferences = this._accessor.preferences
           const { theme } = preferences.getAll()
 
           // Application menu is automatically updated via preference manager.

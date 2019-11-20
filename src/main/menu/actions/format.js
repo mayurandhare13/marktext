@@ -27,7 +27,7 @@ export const updateFormatMenu = (applicationMenu, formats) => {
   formatMenuItem.submenu.items.forEach(item => (item.checked = false))
   formatMenuItem.submenu.items
     .forEach(item => {
-      if (item.id && formats.some(format => format.type === MENU_ID_FORMAT_MAP[item.id])) {
+      if (item.id && formats.some(f => f.type === MENU_ID_FORMAT_MAP[item.id])) {
         item.checked = true
       }
     })
