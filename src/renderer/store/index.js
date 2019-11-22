@@ -25,16 +25,16 @@ const state = {
 const getters = {}
 
 const mutations = {
-  SET_WIN_STATUS (state, status) {
-    state.windowActive = status
+  SET_WIN_STATUS (projState, status) {
+    projState.windowActive = status
   },
-  SET_INITIALIZED (state) {
-    state.init = true
+  SET_INITIALIZED (projState) {
+    projState.init = true
   }
 }
 
 const actions = {
-  LINTEN_WIN_STATUS ({ commit, state }) {
+  LINTEN_WIN_STATUS ({ commit, projState }) {
     ipcRenderer.on('AGANI::window-active-status', (e, { status }) => {
       commit('SET_WIN_STATUS', status)
     })

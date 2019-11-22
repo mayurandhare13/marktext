@@ -81,25 +81,25 @@ const state = {
 const getters = {}
 
 const mutations = {
-  SET_USER_PREFERENCE (state, preference) {
+  SET_USER_PREFERENCE (projState, preference) {
     Object.keys(preference).forEach(key => {
-      if (typeof preference[key] !== 'undefined' && typeof state[key] !== 'undefined') {
-        state[key] = preference[key]
+      if (typeof preference[key] !== 'undefined' && typeof projState[key] !== 'undefined') {
+        projState[key] = preference[key]
       }
     })
   },
-  SET_MODE (state, { type, checked }) {
-    state[type] = checked
+  SET_MODE (projState, { type, checked }) {
+    projState[type] = checked
   }
 }
 
 const actions = {
-  ASK_FOR_USER_PREFERENCE ({ commit, state, rootState }) {
+  ASK_FOR_USER_PREFERENCE ({ commit, projState, rootState }) {
     ipcRenderer.send('mt::ask-for-user-preference')
     ipcRenderer.send('mt::ask-for-user-data')
 
-    ipcRenderer.on('AGANI::user-preference', (e, preferences) => {
-      commit('SET_USER_PREFERENCE', preferences)
+    ipcRenderer.on('AGANI::user-preference', (e, userPreferences) => {
+      commit('SET_USER_PREFERENCE', userPreferences)
     })
   },
 
