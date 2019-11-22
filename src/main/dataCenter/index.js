@@ -78,10 +78,10 @@ class DataCenter extends EventEmitter {
 
   addImage (key, url) {
     const items = this.store.get(key)
-    const alreadyHas = items.some(item => item.url === url)
+    const alreadyHas = items.some(itemNew => item.url === url)
     let item
     if (alreadyHas) {
-      item = items.find(item => item.url === url)
+      item = items.find(itemNew => item.url === url)
       item.timeStamp = +new Date()
     } else {
       item = {

@@ -29,6 +29,6 @@ export const screenshot = (win, type) => {
   ipcMain.emit('screen-capture', win)
 }
 
-export const lineEnding = (win, lineEnding) => {
+export const lineEndingNew = (win, lineEnding) => {
   win.webContents.send('AGANI::set-line-ending', { lineEnding, ignoreSaveStatus: false })
 }

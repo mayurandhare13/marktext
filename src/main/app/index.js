@@ -99,13 +99,13 @@ class App {
 
     // Prevent to load webview and opening links or new windows via HTML/JS.
     app.on('web-contents-created', (event, contents) => {
-      contents.on('will-attach-webview', event => {
+      contents.on('will-attach-webview', eventNew => {
         event.preventDefault()
       })
-      contents.on('will-navigate', event => {
+      contents.on('will-navigate', eventNew => {
         event.preventDefault()
       })
-      contents.on('new-window', event => {
+      contents.on('new-window', eventNew => {
         event.preventDefault()
       })
     })
@@ -266,11 +266,11 @@ class App {
 
     const fileSet = new Set()
     const directorySet = new Set()
-    for (const { isDir, path } of pathsToOpen) {
+    for (const { isDir, pathNew } of pathsToOpen) {
       if (isDir) {
-        directorySet.add(path)
+        directorySet.add(pathNew)
       } else {
-        fileSet.add(path)
+        fileSet.add(pathNew)
       }
     }
 
@@ -397,7 +397,7 @@ class App {
             const image = clipboard.readImage()
             const bufferImage = image.toPNG()
             await fse.writeFile(screenshotFileName, bufferImage)
-          } catch (err) {
+          } catch (errNew) {
             log.error(err)
           }
           win.webContents.send('mt::screenshot-captured')

@@ -208,9 +208,9 @@ var parser = function() {
     function Parser() {
         this.yy = {};
     }
-    var o = function(k, v, o, l) {
+    var o_new = function(k, v, o, l) {
         for (o = o || {}, l = k.length; l--; o[k[l]] = v) ;
-        return o;
+        return o_new;
     }, $V0 = [ 5, 8, 9, 13, 15, 24 ], $V1 = [ 1, 13 ], $V2 = [ 1, 17 ], $V3 = [ 24, 29, 30 ], parser = {
         trace: function() {},
         yy: {},

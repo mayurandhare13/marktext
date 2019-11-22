@@ -30,7 +30,7 @@ if (!/^(darwin|win32|linux)$/i.test(process.platform)) {
 setupExceptionHandler()
 
 const args = cli()
-const appEnvironment = setupEnvironment(args)
+const appEnvironmentNew = setupEnvironment(args)
 initializeLogger(appEnvironment)
 
 // Workaround for GH#1359
