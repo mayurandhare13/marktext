@@ -51,9 +51,9 @@ const resource = {
   },
   sm (base64) {
     const api = 'https://sm.ms/api/upload'
-    const data = new window.FormData()
-    data.append('smfile', dataURItoBlob(base64, 'temp.png'))
-    return axios.post(api, data).then(({ data }) => {
+    const formData = new window.FormData()
+    formData.append('smfile', dataURItoBlob(base64, 'temp.png'))
+    return axios.post(api, formData).then(({ data }) => {
       const { data: res } = data
       return {
         url: res.url,

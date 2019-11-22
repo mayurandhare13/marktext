@@ -14,13 +14,13 @@ const state = {
 const getters = {}
 
 const mutations = {
-  SET_LAYOUT (state, layout) {
-    Object.assign(state, layout)
+  SET_LAYOUT (projState, layout) {
+    Object.assign(projState, layout)
   },
-  SET_SIDE_BAR_WIDTH (state, width) {
+  SET_SIDE_BAR_WIDTH (projState, barWidth) {
     // TODO: Add side bar to session (GH#732).
-    localStorage.setItem('side-bar-width', Math.max(+width, 220))
-    state.sideBarWidth = width
+    localStorage.setItem('side-bar-width', Math.max(+barWidth, 220))
+    projState.sideBarWidth = barWidth
   }
 }
 
@@ -35,19 +35,19 @@ const actions = {
       dispatch('SET_LAYOUT_MENU_ITEM')
     })
   },
-  SET_LAYOUT_MENU_ITEM ({ state }) {
+  SET_LAYOUT_MENU_ITEM ({ projState }) {
     const { windowId } = global.marktext.env
-    const { showTabBar, showSideBar } = state
+    const { showTabBar, showSideBar } = projState
     ipcRenderer.send('mt::view-layout-changed', windowId, { showTabBar, showSideBar })
   },
-  CHANGE_SIDE_BAR_WIDTH ({ commit }, width) {
-    if (width < 220) {
+  CHANGE_SIDE_BAR_WIDTH ({ commit }, barWidth) {
+    if (barWidth < 220) {
       commit('SET_LAYOUT', { showSideBar: false })
       const { windowId } = global.marktext.env
       const { showTabBar, showSideBar } = state
       ipcRenderer.send('mt::view-layout-changed', windowId, { showTabBar, showSideBar })
     } else {
-      commit('SET_SIDE_BAR_WIDTH', width)
+      commit('SET_SIDE_BAR_WIDTH', barWidth)
     }
   }
 }
