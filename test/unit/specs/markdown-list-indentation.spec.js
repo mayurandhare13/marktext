@@ -1,5 +1,5 @@
 import ContentState from '../../../src/muya/lib/contentState'
-import EventCenter from '../../../src/muya/lib/eventHandler/event'
+import EventCenter from '../../../src/muya/lib/eventHandler/EventCenter'
 import ExportMarkdown from '../../../src/muya/lib/utils/exportMarkdown'
 import { MUYA_DEFAULT_OPTION } from '../../../src/muya/lib/config'
 

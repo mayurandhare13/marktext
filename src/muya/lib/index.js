@@ -1,5 +1,5 @@
 import ContentState from './contentState'
-import EventCenter from './eventHandler/event'
+import EventCenter from './eventHandler/EventCenter'
 import MouseEvent from './eventHandler/mouseEvent'
 import Clipboard from './eventHandler/clipboard'
 import Keyboard from './eventHandler/keyboard'

@@ -48,13 +48,9 @@ class Clipboard {
   }
 
   copy (name) {
-    switch (name) {
-      case 'table':
-        this._copyType = 'copyTable'
-        document.execCommand('copy')
-        break
-      default:
-        break
+    if (name === 'table') {
+      this._copyType = 'copyTable'
+      document.execCommand('copy')
     }
   }
 }
