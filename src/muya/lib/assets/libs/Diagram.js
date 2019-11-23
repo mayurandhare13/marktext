@@ -208,8 +208,8 @@ var parser = function() {
     function Parser() {
         this.yy = {};
     }
-    var o_new = function(k, v, o, l) {
-        for (o = o || {}, l = k.length; l--; o[k[l]] = v) ;
+    var o_new = function(k, v, o_new, l) {
+        for (o = o || {}, l = k.length; l--; o_new[k[l]] = v) ;
         return o_new;
     }, $V0 = [ 5, 8, 9, 13, 15, 24 ], $V1 = [ 1, 13 ], $V2 = [ 1, 17 ], $V3 = [ 24, 29, 30 ], parser = {
         trace: function() {},
@@ -351,7 +351,7 @@ var parser = function() {
                 this.$ = Diagram.unescape($$[$0].substring(1));
             }
         },
-        table: [ o($V0, [ 2, 2 ], {
+        table: [ o_new($V0, [ 2, 2 ], {
             3: 1,
             4: 2
         }), {
@@ -370,10 +370,10 @@ var parser = function() {
             24: $V1
         }, {
             1: [ 2, 1 ]
-        }, o($V0, [ 2, 3 ]), o($V0, [ 2, 4 ]), o($V0, [ 2, 5 ]), {
+        }, o_new($V0, [ 2, 3 ]), o_new($V0, [ 2, 4 ]), o_new($V0, [ 2, 5 ]), {
             10: 14,
             24: [ 1, 15 ]
-        }, o($V0, [ 2, 7 ]), o($V0, [ 2, 8 ]), {
+        }, o_new($V0, [ 2, 7 ]), o_new($V0, [ 2, 8 ]), {
             14: 16,
             31: $V2
         }, {
@@ -386,7 +386,7 @@ var parser = function() {
             18: [ 1, 23 ],
             21: [ 1, 24 ],
             22: [ 1, 25 ]
-        }, o([ 20, 27, 28, 31 ], [ 2, 17 ]), o($V0, [ 2, 6 ]), o($V0, [ 2, 18 ]), o($V0, [ 2, 9 ]), o($V0, [ 2, 25 ]), {
+        }, o_new([ 20, 27, 28, 31 ], [ 2, 17 ]), o_new($V0, [ 2, 6 ]), o_new($V0, [ 2, 18 ]), o_new($V0, [ 2, 9 ]), o_new($V0, [ 2, 25 ]), {
             17: 26,
             24: $V1
         }, {
@@ -394,7 +394,7 @@ var parser = function() {
             26: 27,
             29: [ 1, 28 ],
             30: [ 1, 29 ]
-        }, o($V3, [ 2, 21 ]), o($V3, [ 2, 22 ]), {
+        }, o_new($V3, [ 2, 21 ]), o_new($V3, [ 2, 22 ]), {
             17: 30,
             24: $V1
         }, {
@@ -423,7 +423,7 @@ var parser = function() {
         }, {
             20: [ 1, 36 ],
             31: [ 2, 12 ]
-        }, o($V0, [ 2, 16 ]), o($V0, [ 2, 10 ]), o($V0, [ 2, 11 ]), {
+        }, o_new($V0, [ 2, 16 ]), o_new($V0, [ 2, 10 ]), o_new($V0, [ 2, 11 ]), {
             17: 37,
             24: $V1
         }, {

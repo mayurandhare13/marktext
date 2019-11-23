@@ -9,7 +9,7 @@ import paragraph from './paragraph'
 import format from './format'
 import theme from './theme'
 
-export dockMenu from './dock'
+export dockMenu from './dockMenu'
 
 /**
  * Create the setting window menu.

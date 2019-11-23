@@ -6,14 +6,14 @@ import log from 'electron-log'
 import { app, BrowserWindow, clipboard, dialog, ipcMain, systemPreferences } from 'electron'
 import { isChildOfDirectory } from 'common/filesystem/paths'
 import { isLinux, isOsx } from '../config'
-import parseArgs from '../cli/parser'
+import parseArgs from '../cli/parseArgs'
 import { normalizeMarkdownPath } from '../filesystem/markdown'
 import { selectTheme } from '../menu/actions/theme'
 import { dockMenu } from '../menu/templates'
 import { watchers } from '../utils/imagePathAutoComplement'
 import { WindowType } from '../windows/base'
-import EditorWindow from '../windows/editor'
-import SettingWindow from '../windows/setting'
+import EditorWindow from '../windows/editorWindow'
+import SettingWindow from '../windows/SettingWindow'
 
 class App {
   /**
@@ -98,15 +98,15 @@ class App {
     })
 
     // Prevent to load webview and opening links or new windows via HTML/JS.
-    app.on('web-contents-created', (event, contents) => {
+    app.on('web-contents-created', (eventNew, contents) => {
       contents.on('will-attach-webview', eventNew => {
-        event.preventDefault()
+        eventNew.preventDefault()
       })
       contents.on('will-navigate', eventNew => {
-        event.preventDefault()
+        eventNew.preventDefault()
       })
       contents.on('new-window', eventNew => {
-        event.preventDefault()
+        eventNew.preventDefault()
       })
     })
   }
@@ -398,7 +398,7 @@ class App {
             const bufferImage = image.toPNG()
             await fse.writeFile(screenshotFileName, bufferImage)
           } catch (errNew) {
-            log.error(err)
+            log.error(errNew)
           }
           win.webContents.send('mt::screenshot-captured')
         })

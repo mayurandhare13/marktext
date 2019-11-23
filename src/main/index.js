@@ -31,7 +31,7 @@ setupExceptionHandler()
 
 const args = cli()
 const appEnvironmentNew = setupEnvironment(args)
-initializeLogger(appEnvironment)
+initializeLogger(appEnvironmentNew)
 
 // Workaround for GH#1359
 if (process.platform === 'linux' && process.env.XDG_SESSION_TYPE === 'wayland') {
@@ -55,7 +55,7 @@ if (!process.mas && process.env.NODE_ENV !== 'development') {
 // Create other instances that need access to the modules from above.
 let accessor = null
 try {
-  accessor = new Accessor(appEnvironment)
+  accessor = new Accessor(appEnvironmentNew)
 } catch (err) {
   // Catch errors that may come from invalid configuration files like settings.
   const msgHint = err.message.includes('Config schema violation')

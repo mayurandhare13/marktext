@@ -2,7 +2,7 @@ import path from 'path'
 import { app } from 'electron'
 import os from 'os'
 import { isDirectory } from 'common/filesystem'
-import parseArgs from './parser'
+import parseArgs from './parseArgs'
 import { dumpKeyboardInformation } from '../keyboard'
 import { getPath } from '../utils'
 

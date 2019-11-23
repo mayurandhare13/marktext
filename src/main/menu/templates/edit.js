@@ -132,14 +132,14 @@ export default function (keybindings, userPreference) {
         label: 'Carriage return and line feed (CRLF)',
         type: 'radio',
         click (menuItem, browserWindow) {
-          actions.lineEnding(browserWindow, 'crlf')
+          actions.lineEndingNew(browserWindow, 'crlf')
         }
       }, {
         id: 'lfLineEndingMenuEntry',
         label: 'Line feed (LF)',
         type: 'radio',
         click (menuItem, browserWindow) {
-          actions.lineEnding(browserWindow, 'lf')
+          actions.lineEndingNew(browserWindow, 'lf')
         }
       }]
     }]
